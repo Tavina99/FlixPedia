@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "621746795231",
+    "project_id": "flix-pedia",
+    "storage_bucket": "flix-pedia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621746795231:android:64adb84c80d606b6612f6a",
+        "android_client_info": {
+          "package_name": "com.example.flixpedia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD29tIVU_l9tns47ZLvm1VEZRpGKsPcBMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

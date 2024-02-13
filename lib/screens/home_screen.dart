@@ -1,10 +1,13 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flixpedia/api/api.dart';
 import 'package:flixpedia/models/movie.dart';
 import 'package:flixpedia/widgets/MoviesSlider.dart';
 import 'package:flixpedia/widgets/TrendingSlider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flixpedia/colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,8 +15,6 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
-
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Movie>> trendingMovies;
@@ -26,10 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
     topratedMovies = Api().getTopRatedMovies();
     upcomingMovies= Api().getUpcomingMovies();
   }
-
+  final user = FirebaseAuth.instance.currentUser!;
+  void signUserOut(){
+    FirebaseAuth.instance.signOut();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:Colours.scaffoldBgColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -40,6 +45,13 @@ class _HomeScreenState extends State<HomeScreen> {
           filterQuality: FilterQuality.high,
           ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: signUserOut,
+             icon: const Icon(Icons.logout,color: Colors.white,),
+             )
+        ],
+        
 
       ),
       body: SingleChildScrollView(
@@ -49,7 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Trending Movies', style: GoogleFonts.aBeeZee(fontSize: 25),
+              Text("Logged in as : ${user.email!}",style: GoogleFonts.dmSans(fontSize: 15,color: Color(0xFFE50914),)),
+              const SizedBox(height: 24,),
+              Text('Trending Movies', style: GoogleFonts.aBeeZee(fontSize: 25,color: Colors.white,),
               ),
               const SizedBox(height: 32),
               SizedBox(
@@ -74,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text('Top Rated Movies',
               style: GoogleFonts.aBeeZee(
                 fontSize: 25,
+                color: Colors.white,
                 ),
               ),
               const SizedBox(height: 32),
@@ -99,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text('Upcoming Movies',
               style: GoogleFonts.aBeeZee(
                 fontSize: 25,
+                color: Colors.white,
                 ),
               ),
               const SizedBox(height: 32),
