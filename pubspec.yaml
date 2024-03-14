@@ -14,7 +14,10 @@ dependencies:
   carousel_slider: ^4.2.1
   firebase_core: ^2.25.4
   firebase_auth: ^4.17.4
-
+  shared_preferences: ^2.2.2
+  cloud_firestore: ^4.14.0
+  image_picker: ^1.0.7
+  firebase_storage: ^11.6.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

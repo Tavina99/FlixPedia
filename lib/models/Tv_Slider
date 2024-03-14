@@ -3,8 +3,9 @@ import 'package:flixpedia/screens/details_screen.dart';
 import 'package:flixpedia/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
-class TrendingSlider extends StatelessWidget {
-  const TrendingSlider({
+
+class TvSlider extends StatelessWidget {
+  const TvSlider({
     super.key,
     required this.snapshot,
   });
@@ -30,8 +31,8 @@ class TrendingSlider extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DetailsScreen(
-                    movie: snapshot.data[itemIndex],
+                  builder: (context) => DetailsScreenTv(
+                    tv: snapshot.data[itemIndex],
                   ),
                 ),
               );

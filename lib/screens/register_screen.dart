@@ -54,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context){
         return AlertDialog(
-          backgroundColor: Color(0xFFE50914),
+          backgroundColor: const Color(0xFFE50914),
           title:Center(
             
             child: Text(

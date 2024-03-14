@@ -32,9 +32,9 @@ class _LoginPageState extends State<LoginPage> {
         email: emailController.text,
         password: passwordController.text,
       );
-      Navigator.pop(context);
+      if(context.mounted)Navigator.pop(context);
     } on FirebaseAuthException catch (e){
-      Navigator.pop(context);
+      if(context.mounted)Navigator.pop(context);
       //show error message
       showErrorMessage(e.code);
     }
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     //username textfield
                     MyTextField(
                       controller: emailController,
-                      hintText: 'Username',
+                      hintText: 'Email',
                       obscuretext: false,
                     ),
                     const SizedBox(height: 25),
