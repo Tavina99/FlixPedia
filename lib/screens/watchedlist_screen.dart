@@ -5,17 +5,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
  // Ensure this import matches your project structure
 import 'package:flixpedia/widgets/constants.dart'; // Adjust according to your project
 
-class WatchlistScreen extends StatefulWidget {
-  const WatchlistScreen({super.key});
+class WatchedlistScreen extends StatefulWidget {
+  const WatchedlistScreen({super.key});
 
   @override
-  WatchlistScreenState createState() => WatchlistScreenState();
+  WatchedlistScreenState createState() => WatchedlistScreenState();
 }
 
-class WatchlistScreenState extends State<WatchlistScreen> {
+class WatchedlistScreenState extends State<WatchedlistScreen> {
   Future<List<Map<String, dynamic>>> fetchWatchlist() async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final QuerySnapshot querySnapshot = await firestore.collection('watchlist').get();
+    final QuerySnapshot querySnapshot = await firestore.collection('watchedlist').get();
 
     // Map each document to a Map<String, dynamic>
     List<Map<String, dynamic>> moviesList = querySnapshot.docs.map((doc) {
@@ -39,7 +39,7 @@ class WatchlistScreenState extends State<WatchlistScreen> {
 
   Future<void> removeFromWatchlist(String title) async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    await firestore.collection('watchlist').doc(title).delete();
+    await firestore.collection('watchedlist').doc(title).delete();
     setState(() {}); // Refresh the page to show the updated watchlist
   }
 
@@ -47,7 +47,7 @@ class WatchlistScreenState extends State<WatchlistScreen> {
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
-      title: const Text("Your Watch List", style: TextStyle(color: Colors.white)),
+      title: const Text("Your Watched List", style: TextStyle(color: Colors.white)),
       backgroundColor: const Color(0xFFE50914), // Elegant AppBar color
     ),
     body: FutureBuilder<List<Map<String, dynamic>>>(

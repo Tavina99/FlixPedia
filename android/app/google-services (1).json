@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "621746795231",
+    "firebase_url": "https://flix-pedia-default-rtdb.firebaseio.com",
     "project_id": "flix-pedia",
     "storage_bucket": "flix-pedia.appspot.com"
   },

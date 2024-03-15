@@ -1,17 +1,15 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flixpedia/api/api.dart';
 import 'package:flixpedia/models/movie.dart';
-import 'package:flixpedia/models/tv.dart';
 import 'package:flixpedia/models/MoviesSlider.dart';
 import 'package:flixpedia/models/TrendingSlider.dart';
 import 'package:flixpedia/screens/search_screen.dart';
+import 'package:flixpedia/screens/watchedlist_screen.dart';
 import 'package:flixpedia/screens/watchlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flixpedia/colors.dart';
-import 'package:flixpedia/models/Tv_Slider';
 import 'package:flixpedia/screens/profileSettings_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<Tv>> onTv;
+  late Future<List<Movie>> onTv;
   late Future<List<Movie>> onCinema;
   late Future<List<Movie>> highestGrossingMovies;
   late Future<List<Movie>> bestMovies;
@@ -45,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void signUserOut(){
     FirebaseAuth.instance.signOut();
   }
+  
   
   @override
   Widget build(BuildContext context) {
@@ -108,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                  MaterialPageRoute(builder: (context) =>  ProfileSettingsScreen()),
             );
               }),
-              _createDrawerItem(icon: Icons.list, text: 'Watchlist', onTap: () {
+              _createDrawerItem(icon: Icons.bookmark_add, text: 'Watchlist', onTap: () {
                 // Navigate to Watchlist Page
                 Navigator.push(
                  context,
@@ -116,8 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
             );
         
               }),
-              _createDrawerItem(icon: Icons.history, text: 'Watched List', onTap: () {
+              _createDrawerItem(icon: Icons.check, text: 'Watched List', onTap: () {
                 // Navigate to Watched List Page
+                Navigator.push(
+                 context,
+                 MaterialPageRoute(builder: (context) => const WatchedlistScreen()),
+            );
               }),
               _createDrawerItem(icon: Icons.search, text: 'Search History', onTap: () {
                 // Navigate to Search History Page
@@ -169,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(snapshot.error.toString()),
                         );
                     }else if(snapshot.hasData){                    
-                      return TvSlider(snapshot: snapshot);  
+                      return MoviesSlider(snapshot: snapshot);  
                     }else{
                       return const Center(child:CircularProgressIndicator( ));
                     }

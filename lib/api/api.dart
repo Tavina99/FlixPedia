@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flixpedia/models/movie.dart';
-import 'package:flixpedia/models/tv.dart';
 import 'package:flixpedia/widgets/constants.dart';
 import 'package:http/http.dart' as http;
 class Api{
@@ -60,13 +59,13 @@ class Api{
       throw Exception('Something Happened');
     }
    }
-  Future<List<Tv>> getOnTv() async{
+  Future<List<Movie>> getOnTv() async{
     final DateTime now = DateTime.now();
     final formattedDate = "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
     final response = await http.get(Uri.parse('$_onTvUrl&air_date=$formattedDate&region=US'));
     if(response.statusCode == 200){
        final decodedData = json.decode(response.body)['results'] as List;
-       return decodedData.map((tv) => Tv.fromJson(tv)).toList();
+       return decodedData.map((tv) => Movie.fromJson(tv)).toList();
     }else{
       throw Exception('Something Happened');
     }
