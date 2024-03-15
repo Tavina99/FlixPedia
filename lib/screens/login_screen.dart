@@ -76,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: SafeArea(
           child: Center(
+            // SingleChildScrollView to prevent overflow when the keyboard appears.
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                     MyTextField(
                       controller: emailController,
                       hintText: 'Email',
-                      obscuretext: false,
+                      obscuretext: false, // Makes the text visible in the email field.
                     ),
                     const SizedBox(height: 25),
                     //password textfield
@@ -115,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 25),
-                    //sign in button
+                    // Sign-in button that triggers the signUserIn method
                     SigninButton(
                       onTap:signUserIn, 
                       text: "Sign In",
@@ -130,6 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color:Colors.grey[700]),
                           ),
                         const SizedBox(width: 6),
+                        // Link to navigate to the registration page if the user doesn't have an account.
                         GestureDetector(
                           onTap: widget.onTap,
                           child: const Text(

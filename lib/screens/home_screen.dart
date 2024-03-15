@@ -15,10 +15,11 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState(); //Creates state for this StatefulWidget.
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Late initialization of Future variables to hold movie data, indicating they will be populated asynchronously.
   late Future<List<Movie>> onTv;
   late Future<List<Movie>> onCinema;
   late Future<List<Movie>> highestGrossingMovies;
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // API calls to fetch movie data are initialized in the initState() method, ensuring they are executed as soon as the widget is inserted into the widget tree.
     onTv = Api().getOnTv(); 
     onCinema = Api().getOnCinema(); 
     highestGrossingMovies = Api().getHighestGrossingMovies();
@@ -39,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     topratedMovies = Api().getTopRatedMovies();
     upcomingMovies= Api().getUpcomingMovies();
   }
+  // Using FirebaseAuth to access the currently signed-in user. The '!' asserts that currentUser will not be null.
   final user = FirebaseAuth.instance.currentUser!;
   void signUserOut(){
     FirebaseAuth.instance.signOut();
@@ -85,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
         
 
       ),
+      // Drawer provides a slide-in menu with navigation options.
       drawer: Theme(
         data: Theme.of(context).copyWith(
           // Copy the current theme and override the canvas color
@@ -332,6 +336,7 @@ class _HomeScreenState extends State<HomeScreen> {
       )
     );
   }
+   // Helper method to create ListTile widgets for the Drawer navigation menu.
   Widget _createDrawerItem({required IconData icon, required String text, VoidCallback? onTap}) {
     return ListTile(
       title: Row(
